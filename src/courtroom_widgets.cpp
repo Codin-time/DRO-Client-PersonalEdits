@@ -28,6 +28,8 @@
 #include "mk2/graphicsvideoscreen.h"
 #include "theme.h"
 
+#include "lobby.h"
+
 #include <QAction>
 #include <QCheckBox>
 #include <QComboBox>
@@ -257,6 +259,8 @@ void Courtroom::create_widgets()
   ui_call_mod = new AOButton(this, ao_app);
   ui_switch_area_music = new AOButton(this, ao_app);
 
+  ui_fullscreen = new AOButton(this, ao_app);
+
   ui_config_panel = new AOButton(this, ao_app);
   ui_note_button = new AOButton(this, ao_app);
 
@@ -349,6 +353,9 @@ void Courtroom::connect_widgets()
 
   connect(ao_config, SIGNAL(searchable_iniswap_changed(bool)), this, SLOT(update_iniswap_dropdown_searchable()));
   connect(ao_config, SIGNAL(emote_preview_changed(bool)), this, SLOT(on_emote_preview_toggled(bool)));
+
+  connect(ui_fullscreen, SIGNAL(clicked(bool)), this, SLOT(on_fullscreen_clicked()));
+
   connect(ui_emote_left, SIGNAL(clicked()), this, SLOT(on_emote_left_clicked()));
   connect(ui_emote_right, SIGNAL(clicked()), this, SLOT(on_emote_right_clicked()));
 
@@ -539,6 +546,7 @@ void Courtroom::reset_widget_names()
   widget_names = {
       {"courtroom", this},
       {"viewport", ui_viewport},
+      {"fullscreen", ui_fullscreen},
       {"music_display_a", ui_vp_music_display_a},
       {"music_display_b", ui_vp_music_display_b},
       {"music_area", ui_vp_music_area},
@@ -846,6 +854,8 @@ void Courtroom::set_widgets()
 
   set_size_and_pos(ui_viewport, "viewport", COURTROOM_DESIGN_INI, ao_app);
 
+  set_size_and_pos(ui_fullscreen, "fullscreen", COURTROOM_DESIGN_INI, ao_app);
+
   set_size_and_pos(ui_vp_notepad_image, "notepad_image", COURTROOM_DESIGN_INI, ao_app);
   ui_vp_notepad_image->set_theme_image(ao_app->current_theme->get_widget_image("notepad_image", "notepad_image.png", "courtroom"));
   ui_vp_notepad_image->hide();
@@ -1115,6 +1125,8 @@ void Courtroom::set_widgets()
   set_size_and_pos(ui_chat_toggle_button, "chat_toggle", COURTROOM_DESIGN_INI, ao_app);
   set_size_and_pos(ui_gm_toggle_button, "gm_toggle", COURTROOM_DESIGN_INI, ao_app);
 
+  ui_fullscreen->setText("");
+
   ui_change_character->setText("");
   ui_call_mod->setText("");
   ui_switch_area_music->setText("");
@@ -1127,6 +1139,8 @@ void Courtroom::set_widgets()
   ui_player_list_left->setText("");
   ui_player_list_right->setText("");
   ui_area_look->setText("");
+
+  ui_fullscreen->setStyleSheet("");
 
   ui_change_character->setStyleSheet("");
   ui_call_mod->setStyleSheet("");
@@ -1145,6 +1159,11 @@ void Courtroom::set_widgets()
     // Set files, ask questions later
     // set_image first tries the gamemode-timeofday folder, then the theme
     // folder, then falls back to the default theme
+
+    ui_fullscreen->set_image(ao_app->current_theme->get_widget_image("fullscreen", "fullscreen.png", "courtroom"));
+    if (ui_fullscreen->get_image().isEmpty())
+      ui_fullscreen->setText("Fullscreen");
+
     ui_change_character->set_image(ao_app->current_theme->get_widget_image("change_character", "changecharacter.png", "courtroom"));
     if (ui_change_character->get_image().isEmpty())
       ui_change_character->setText("Change Character");

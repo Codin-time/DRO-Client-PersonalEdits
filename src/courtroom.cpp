@@ -33,6 +33,8 @@
 #include "src/datatypes.h"
 #include "theme.h"
 
+#include "lobby.h"
+
 #include <QCheckBox>
 #include <QComboBox>
 #include <QCursor>
@@ -50,6 +52,8 @@
 #include <QTimer>
 #include <QToolTip>
 #include <QVBoxLayout>
+
+#include <QMainWindow>
 
 const int Courtroom::DEFAULT_WIDTH = 714;
 const int Courtroom::DEFAULT_HEIGHT = 668;
@@ -405,6 +409,18 @@ void Courtroom::done_received()
 void Courtroom::set_window_title(QString p_title)
 {
   this->setWindowTitle(p_title);
+}
+
+void Courtroom::on_fullscreen_clicked()
+{
+// So I wasnt to check is the window is full screen, if not, make full screen, else, make maximize
+
+ qDebug() << "Widget Clicked!";
+//  if (m_lobby->isFullScreen())
+//    m_lobby->showMaximized();
+//  } else {
+//    m_lobby->showFullScreen();
+//  }
 }
 
 void Courtroom::set_ambient(QString p_ambient_sfx)

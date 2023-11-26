@@ -286,6 +286,9 @@ private:
   AOApplication *ao_app = nullptr;
   AOConfig *ao_config = nullptr;
 
+  // puts the application into fullscreen or windowed, depending on window state
+  AOButton *ui_fullscreen = nullptr;
+
   QVector<char_type> m_chr_list;
   QStringList m_area_list;
   QStringList m_music_list;
@@ -642,6 +645,7 @@ private:
 
   void reset_widget_toggles();
 
+  void on_fullscreen_clicked();
 
   void construct_char_select();
   void reconstruct_char_select();
