@@ -31,7 +31,7 @@ AOConfigPanel::AOConfigPanel(AOApplication *p_ao_app, QWidget *p_parent)
   ao_app = p_ao_app;
 
   setWindowTitle(tr("Config"));
-  setWindowFlag(Qt::WindowMinMaxButtonsHint, false);
+  setWindowFlag(Qt::WindowMinMaxButtonsHint, true);
 
   AOGuiLoader loader;
   loader.load_from_file(":res/ui/config_panel.ui", this);

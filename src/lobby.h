@@ -28,6 +28,8 @@ public:
   Lobby(AOApplication *p_ao_app);
   ~Lobby();
 
+  Lobby *m_lobby= this;
+
   DRServerInfoList get_combined_server_list();
 
   void set_choose_a_server();

@@ -219,12 +219,14 @@ private:
   DRServerSocket *m_server_socket = nullptr;
   ServerStatus m_server_status = NotConnected;
 
-  Lobby *m_lobby = nullptr;
+public:
+  Lobby *m_lobby;
   bool is_lobby_constructed = false;
 
-  Courtroom *m_courtroom = nullptr;
+  Courtroom *m_courtroom;
   bool is_courtroom_constructed = false;
 
+private:
   ///////////////server metadata////////////////
 
   VersionNumber m_server_client_version;
